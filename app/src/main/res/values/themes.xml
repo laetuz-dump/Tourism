@@ -6,4 +6,11 @@
     </style>
 
     <style name="Theme.Tourism" parent="Base.Theme.Tourism" />
+    <style name="Theme.TourismApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.TourismApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.Tourism.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

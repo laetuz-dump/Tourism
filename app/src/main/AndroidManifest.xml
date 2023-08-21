@@ -21,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".detail.DetailTourismActivity"
+            android:label="@string/title_activity_detail_home"
+            android:theme="@style/Theme.Tourism.NoActionBar" />
     </application>
 
 </manifest>

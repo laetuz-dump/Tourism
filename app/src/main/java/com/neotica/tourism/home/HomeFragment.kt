@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.neotica.tourism.R
 import com.neotica.tourism.core.data.Resource
@@ -14,6 +15,7 @@ import com.neotica.tourism.core.ui.TourismAdapter
 import com.neotica.tourism.core.ui.ViewModelFactory
 import com.neotica.tourism.databinding.FragmentHomeBinding
 import com.neotica.tourism.detail.DetailTourismActivity
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -45,20 +47,20 @@ class HomeFragment : Fragment() {
             val factory = ViewModelFactory.getInstance(requireActivity())
             homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
-            homeViewModel.tourism.observe(viewLifecycleOwner) { tourism ->
-                if (tourism != null) {
-                    when (tourism) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                homeViewModel.tourism.collect{
+                    when (it) {
                         is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                         is Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
-                            tourismAdapter.setData(tourism.data)
+                            tourismAdapter.setData(it.data)
                         }
 
                         is Resource.Error -> {
                             binding.progressBar.visibility = View.GONE
                             binding.viewError.root.visibility = View.VISIBLE
                             binding.viewError.tvError.text =
-                                tourism.message ?: getString(R.string.something_wrong)
+                                it.message ?: getString(R.string.something_wrong)
                         }
                     }
                 }

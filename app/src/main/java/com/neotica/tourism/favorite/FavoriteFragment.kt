@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.neotica.tourism.core.ui.TourismAdapter
 import com.neotica.tourism.core.ui.ViewModelFactory
 import com.neotica.tourism.databinding.FragmentFavoriteBinding
 import com.neotica.tourism.detail.DetailTourismActivity
+import kotlinx.coroutines.launch
 
 class FavoriteFragment : Fragment() {
 
@@ -42,11 +44,13 @@ class FavoriteFragment : Fragment() {
 
             val factory = ViewModelFactory.getInstance(requireActivity())
             favoriteViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
-
-            favoriteViewModel.favoriteTourism.observe(viewLifecycleOwner, { dataTourism ->
-                tourismAdapter.setData(dataTourism)
-                binding.viewEmpty.root.visibility = if (dataTourism.isNotEmpty()) View.GONE else View.VISIBLE
-            })
+            lifecycleScope.launch {
+                favoriteViewModel.favoriteTourism.collect{
+                    tourismAdapter.setData(it)
+                    binding.viewEmpty.root.visibility =
+                        if (it.isNotEmpty()) View.GONE else View.VISIBLE
+                }
+            }
 
             with(binding.rvTourism) {
                 layoutManager = LinearLayoutManager(context)

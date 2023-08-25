@@ -1,44 +1,49 @@
 package com.neotica.tourism.core.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import com.neotica.tourism.core.data.source.remote.network.ApiResponse
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
-import com.neotica.tourism.core.utils.AppExecutors
+abstract class NetworkBoundResource<ResultType, RequestType> {
 
-abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecutors: AppExecutors) {
-
-    private val result = MediatorLiveData<Resource<ResultType>>()
-
-    init {
-        result.value = Resource.Loading(null)
-
-        @Suppress("LeakingThis")
-        val dbSource = loadFromDB()
-
-        result.addSource(dbSource) { data ->
-            result.removeSource(dbSource)
-            if (shouldFetch(data)) {
-                fetchFromNetwork(dbSource)
-            } else {
-                result.addSource(dbSource) { newData ->
-                    result.value = Resource.Success(newData)
+    private val result: Flow<Resource<ResultType>> = flow {
+        emit(Resource.Loading())
+        val dbSource = loadFromDB().first()
+        if (shouldFetch(dbSource)) {
+            emit(Resource.Loading())
+            when (val apiResponse = createCall().first()) {
+                is ApiResponse.Success -> {
+                    saveCallResult(apiResponse.data)
+                    emitAll(loadFromDB().map { Resource.Success(it) })
                 }
+                is ApiResponse.Error -> {
+                    onFetchFailed()
+                    emit(Resource.Error(apiResponse.errorMessage))
+                }
+
+                else -> {}
             }
+        } else {
+            emitAll(loadFromDB().map { Resource.Success(it) })
         }
     }
 
     protected open fun onFetchFailed() {}
 
-    protected abstract fun loadFromDB(): LiveData<ResultType>
+    protected abstract fun loadFromDB(): Flow<ResultType>
 
     protected abstract fun shouldFetch(data: ResultType?): Boolean
 
-    protected abstract fun createCall(): LiveData<ApiResponse<RequestType>>
+    protected abstract suspend fun createCall(): Flow<ApiResponse<RequestType>>
 
-    protected abstract fun saveCallResult(data: RequestType)
+    protected abstract suspend fun saveCallResult(data: RequestType)
 
-    private fun fetchFromNetwork(dbSource: LiveData<ResultType>) {
+    fun asFlow(): Flow<Resource<ResultType>> = result
+
+    /*private fun fetchFromNetwork(dbSource: Flow<ResultType>) {
 
         val apiResponse = createCall()
 
@@ -73,5 +78,5 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
         }
     }
 
-    fun asLiveData(): LiveData<Resource<ResultType>> = result
+    fun asLiveData(): LiveData<Resource<ResultType>> = result*/
 }

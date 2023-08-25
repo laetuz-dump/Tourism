@@ -1,8 +1,8 @@
 package com.neotica.tourism.core.data.source.local
 
-import androidx.lifecycle.LiveData
 import com.neotica.tourism.core.data.source.local.entity.TourismEntity
 import com.neotica.tourism.core.data.source.local.room.TourismDao
+import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource private constructor(private val tourismDao: TourismDao) {
 
@@ -15,9 +15,9 @@ class LocalDataSource private constructor(private val tourismDao: TourismDao) {
             }
     }
 
-    fun getAllTourism(): LiveData<List<TourismEntity>> = tourismDao.getAllTourism()
+    fun getAllTourism(): Flow<List<TourismEntity>> = tourismDao.getAllTourism()
 
-    fun getFavoriteTourism(): LiveData<List<TourismEntity>> = tourismDao.getFavoriteTourism()
+    fun getFavoriteTourism(): Flow<List<TourismEntity>> = tourismDao.getFavoriteTourism()
 
     fun insertTourism(tourismList: List<TourismEntity>) = tourismDao.insertTourism(tourismList)
 

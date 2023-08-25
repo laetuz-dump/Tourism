@@ -55,7 +55,9 @@ dependencies {
 
     //Room
     val roomVersion = "2.5.2"
+    implementation("androidx.room:room-ktx:2.5.2")
     implementation ("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     //noinspection KaptUsageInsteadOfKsp
     kapt ("androidx.room:room-compiler:$roomVersion")
     androidTestImplementation ("androidx.room:room-testing:$roomVersion")
@@ -64,6 +66,12 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
+    //Coroutines
+    val kotlinVersion = "1.6.2"
+    api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinVersion")
+    api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinVersion")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:$kotlinVersion")
 
     //Testing
     testImplementation("junit:junit:4.13.2")

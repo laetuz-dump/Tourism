@@ -43,40 +43,4 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     fun asFlow(): Flow<Resource<ResultType>> = result
 
-    /*private fun fetchFromNetwork(dbSource: Flow<ResultType>) {
-
-        val apiResponse = createCall()
-
-        result.addSource(dbSource) { newData ->
-            result.value = Resource.Loading(newData)
-        }
-        result.addSource(apiResponse) { response ->
-            result.removeSource(apiResponse)
-            result.removeSource(dbSource)
-            when (response) {
-                is ApiResponse.Success ->
-                    mExecutors.diskIO().execute {
-                        saveCallResult(response.data)
-                        mExecutors.mainThread().execute {
-                            result.addSource(loadFromDB()) { newData ->
-                                result.value = Resource.Success(newData)
-                            }
-                        }
-                    }
-                is ApiResponse.Empty -> mExecutors.mainThread().execute {
-                    result.addSource(loadFromDB()) { newData ->
-                        result.value = Resource.Success(newData)
-                    }
-                }
-                is ApiResponse.Error -> {
-                    onFetchFailed()
-                    result.addSource(dbSource) { newData ->
-                        result.value = Resource.Error(response.errorMessage, newData)
-                    }
-                }
-            }
-        }
-    }
-
-    fun asLiveData(): LiveData<Resource<ResultType>> = result*/
 }

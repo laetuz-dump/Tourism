@@ -17,3 +17,11 @@ val viewModelModule = module {
     viewModel { FavoriteViewModel(get()) }
     viewModel { DetailTourismViewModel(get()) }
 }
+
+val modules = listOf(
+    databaseModule,
+    networkModule,
+    repositoryModule,
+    useCaseModule,
+    viewModelModule
+)

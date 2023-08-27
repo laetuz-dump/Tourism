@@ -13,11 +13,7 @@ class MyApp: Application() {
             androidLogger(Level.NONE)
             androidContext(this@MyApp)
             modules(
-                databaseModule,
-                networkModule,
-                repositoryModule,
-                useCaseModule,
-                viewModelModule
+                modules
             )
         }
     }

@@ -1,14 +1,16 @@
 package com.neotica.tourism.detail
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.neotica.tourism.MyApp
+import com.neotica.tourism.R
 import com.neotica.tourism.core.domain.model.Tourism
 import com.neotica.tourism.core.ui.ViewModelFactory
-import com.neotica.tourism.R
 import com.neotica.tourism.databinding.ActivityDetailTourismBinding
+import javax.inject.Inject
 
 class DetailTourismActivity : AppCompatActivity() {
 
@@ -16,18 +18,19 @@ class DetailTourismActivity : AppCompatActivity() {
         const val EXTRA_DATA = "extra_data"
     }
 
-    private lateinit var detailTourismViewModel: DetailTourismViewModel
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val detailTourismViewModel: DetailTourismViewModel by viewModels { factory }
     private lateinit var binding: ActivityDetailTourismBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (application as MyApp).appComponent.inject(this)
         binding = ActivityDetailTourismBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-
-        val factory = ViewModelFactory.getInstance(this)
-        detailTourismViewModel = ViewModelProvider(this, factory)[DetailTourismViewModel::class.java]
 
         val detailTourism = intent.getParcelableExtra<Tourism>(EXTRA_DATA)
         showDetailTourism(detailTourism)

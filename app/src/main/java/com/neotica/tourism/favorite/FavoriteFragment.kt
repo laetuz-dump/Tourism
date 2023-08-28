@@ -1,26 +1,36 @@
 package com.neotica.tourism.favorite
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.neotica.tourism.MyApp
 import com.neotica.tourism.core.ui.TourismAdapter
 import com.neotica.tourism.core.ui.ViewModelFactory
 import com.neotica.tourism.databinding.FragmentFavoriteBinding
 import com.neotica.tourism.detail.DetailTourismActivity
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class FavoriteFragment : Fragment() {
 
-    private lateinit var favoriteViewModel: FavoriteViewModel
+    @Inject
+    lateinit var factory: ViewModelFactory
+    private val favoriteViewModel: FavoriteViewModel by viewModels { factory }
 
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApp).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +52,6 @@ class FavoriteFragment : Fragment() {
                 startActivity(intent)
             }
 
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            favoriteViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
             lifecycleScope.launch {
                 favoriteViewModel.favoriteTourism.collect{
                     tourismAdapter.setData(it)

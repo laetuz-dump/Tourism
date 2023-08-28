@@ -1,28 +1,17 @@
 package com.neotica.tourism.core.ui
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.neotica.tourism.core.di.Injection
 import com.neotica.tourism.core.domain.usecase.TourismUseCase
 import com.neotica.tourism.detail.DetailTourismViewModel
+import com.neotica.tourism.di.AppScope
 import com.neotica.tourism.favorite.FavoriteViewModel
 import com.neotica.tourism.home.HomeViewModel
+import javax.inject.Inject
 
-class ViewModelFactory private constructor(private val tourismUseCase: TourismUseCase) :
+@AppScope
+class ViewModelFactory @Inject constructor(private val tourismUseCase: TourismUseCase) :
     ViewModelProvider.NewInstanceFactory() {
-
-    companion object {
-        @Volatile
-        private var instance: ViewModelFactory? = null
-
-        fun getInstance(context: Context): ViewModelFactory =
-            instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(
-                    Injection.provideTourismUseCase(context)
-                )
-            }
-    }
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T =

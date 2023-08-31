@@ -71,7 +71,12 @@ dependencies {
     val kotlinVersion = "1.6.2"
     api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinVersion")
     api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinVersion")
+
+    //Lifecycle
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:$kotlinVersion")
+
+    //LiveData
+    //implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$kotlinVersion")
 
     //Testing
     testImplementation("junit:junit:4.13.2")

@@ -1,6 +1,5 @@
 package com.neotica.tourism.home
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,29 +9,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.neotica.tourism.MyApp
 import com.neotica.tourism.R
 import com.neotica.tourism.core.data.Resource
 import com.neotica.tourism.core.ui.TourismAdapter
-import com.neotica.tourism.core.ui.ViewModelFactory
 import com.neotica.tourism.databinding.FragmentHomeBinding
 import com.neotica.tourism.detail.DetailTourismActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    @Inject
-    lateinit var factory: ViewModelFactory
-    private val homeViewModel: HomeViewModel by viewModels { factory }
+    private val homeViewModel: HomeViewModel by viewModels()
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as MyApp).appComponent.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

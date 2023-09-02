@@ -11,7 +11,9 @@ import com.google.android.material.navigation.NavigationView
 import com.neotica.tourism.databinding.ActivityMainBinding
 import com.neotica.tourism.favorite.FavoriteFragment
 import com.neotica.tourism.home.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {

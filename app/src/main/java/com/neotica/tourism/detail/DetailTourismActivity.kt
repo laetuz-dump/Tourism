@@ -5,28 +5,26 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.neotica.tourism.MyApp
 import com.neotica.tourism.R
 import com.neotica.tourism.core.domain.model.Tourism
-import com.neotica.tourism.core.ui.ViewModelFactory
 import com.neotica.tourism.databinding.ActivityDetailTourismBinding
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailTourismActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_DATA = "extra_data"
     }
 
-    @Inject
-    lateinit var factory: ViewModelFactory
+/*    @Inject
+    lateinit var factory: ViewModelFactory*/
 
-    private val detailTourismViewModel: DetailTourismViewModel by viewModels { factory }
+    private val detailTourismViewModel: DetailTourismViewModel by viewModels()
     private lateinit var binding: ActivityDetailTourismBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (application as MyApp).appComponent.inject(this)
         binding = ActivityDetailTourismBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

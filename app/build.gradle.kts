@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
     id ("kotlin-parcelize")
+    id ("dagger.hilt.android.plugin")
 }
 
 android {
@@ -84,9 +85,13 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //Dagger
-    val daggerVersion = "2.29.1"
+    /*val daggerVersion = "2.29.1"
     implementation ("com.google.dagger:dagger:$daggerVersion")
-    kapt ("com.google.dagger:dagger-compiler:$daggerVersion")
+    kapt ("com.google.dagger:dagger-compiler:$daggerVersion")*/
+
+    val hiltVersion = "2.36"
+    implementation ("com.google.dagger:hilt-android:$hiltVersion")
+    kapt ("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
     //ViewModel
     implementation ("androidx.activity:activity-ktx:1.1.0")

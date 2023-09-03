@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.neotica.core.domain.model.Tourism
 import com.neotica.tourism.R
-import com.neotica.tourism.core.domain.model.Tourism
 import com.neotica.tourism.databinding.ActivityDetailTourismBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

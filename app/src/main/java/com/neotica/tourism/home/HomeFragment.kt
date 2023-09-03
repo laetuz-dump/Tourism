@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.neotica.core.ui.TourismAdapter
 import com.neotica.tourism.R
-import com.neotica.tourism.core.data.Resource
-import com.neotica.tourism.core.ui.TourismAdapter
 import com.neotica.tourism.databinding.FragmentHomeBinding
 import com.neotica.tourism.detail.DetailTourismActivity
 import kotlinx.coroutines.launch
@@ -46,13 +45,13 @@ class HomeFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 homeViewModel.tourism.collect{
                     when (it) {
-                        is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
-                        is Resource.Success -> {
+                        is com.neotica.core.data.Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                        is com.neotica.core.data.Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
                             tourismAdapter.setData(it.data)
                         }
 
-                        is Resource.Error -> {
+                        is com.neotica.core.data.Resource.Error -> {
                             binding.progressBar.visibility = View.GONE
                             binding.viewError.root.visibility = View.VISIBLE
                             binding.viewError.tvError.text =

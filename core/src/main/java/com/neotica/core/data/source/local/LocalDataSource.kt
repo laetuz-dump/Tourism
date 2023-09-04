@@ -1,19 +1,25 @@
 package com.neotica.core.data.source.local
 
-import com.neotica.core.data.source.local.entity.TourismEntity
-import com.neotica.core.data.source.local.room.TourismDao
+import com.neotica.core.data.source.local.entity.CharacterEntity
+import com.neotica.core.data.source.local.room.CharacterDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
-class LocalDataSource (private val tourismDao: TourismDao) {
+class LocalDataSource (private val charDao: CharacterDao) {
 
-    fun getAllTourism(): Flow<List<TourismEntity>> = tourismDao.getAllTourism()
+    fun getAllTourism(): Flow<List<CharacterEntity>> = charDao.getAllCharacter()
 
-    fun getFavoriteTourism(): Flow<List<TourismEntity>> = tourismDao.getFavoriteTourism()
+    fun getFavoriteTourism(): Flow<List<CharacterEntity>> = charDao.getFavoriteCharacter()
 
-    fun insertTourism(tourismList: List<TourismEntity>) = tourismDao.insertTourism(tourismList)
+    fun insertTourism(charList: List<CharacterEntity>) = charDao.insertCharacter(charList)
 
-    fun setFavoriteTourism(tourism: TourismEntity, newState: Boolean) {
-        tourism.isFavorite = newState
-        tourismDao.updateFavoriteTourism(tourism)
+    fun setFavoriteTourism(char: CharacterEntity, newState: Boolean) {
+        char.isFavorite = newState
+        CoroutineScope(Dispatchers.IO).launch {
+            charDao.updateFavoriteCharacter(char)
+        }
+
     }
 }

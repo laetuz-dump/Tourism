@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.neotica.core.ui.TourismAdapter
 import com.neotica.tourism.R
 import com.neotica.tourism.databinding.FragmentHomeBinding
-import com.neotica.tourism.detail.DetailTourismActivity
+import com.neotica.tourism.detail.DetailCharacterActivity
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,13 +37,13 @@ class HomeFragment : Fragment() {
 
             val tourismAdapter = TourismAdapter()
             tourismAdapter.onItemClick = { selectedData ->
-                val intent = Intent(activity, DetailTourismActivity::class.java)
-                intent.putExtra(DetailTourismActivity.EXTRA_DATA, selectedData)
+                val intent = Intent(activity, DetailCharacterActivity::class.java)
+                intent.putExtra(DetailCharacterActivity.EXTRA_DATA, selectedData)
                 startActivity(intent)
             }
 
             viewLifecycleOwner.lifecycleScope.launch {
-                homeViewModel.tourism.collect{
+                homeViewModel.character.collect{
                     when (it) {
                         is com.neotica.core.data.Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                         is com.neotica.core.data.Resource.Success -> {

@@ -4,45 +4,45 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.neotica.core.domain.model.Tourism
+import com.neotica.core.domain.model.Character
 import com.neotica.tourism.R
-import com.neotica.tourism.databinding.ActivityDetailTourismBinding
+import com.neotica.tourism.databinding.ActivityDetailCharacterBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetailTourismActivity : AppCompatActivity() {
+class DetailCharacterActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_DATA = "extra_data"
     }
 
-    private val detailTourismViewModel: DetailTourismViewModel by viewModel()
-    private lateinit var binding: ActivityDetailTourismBinding
+    private val detailCharacterViewModel: DetailCharacterViewModel by viewModel()
+    private lateinit var binding: ActivityDetailCharacterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailTourismBinding.inflate(layoutInflater)
+        binding = ActivityDetailCharacterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
 
 
-        val detailTourism = intent.getParcelableExtra<Tourism>(EXTRA_DATA)
+        val detailTourism = intent.getParcelableExtra<Character>(EXTRA_DATA)
         showDetailTourism(detailTourism)
     }
 
-    private fun showDetailTourism(detailTourism: Tourism?) {
-        detailTourism?.let {
-            supportActionBar?.title = detailTourism.name
-            binding.content.tvDetailDescription.text = detailTourism.description
-            Glide.with(this@DetailTourismActivity)
-                .load(detailTourism.image)
+    private fun showDetailTourism(detailCharacter: Character?) {
+        detailCharacter?.let {
+            supportActionBar?.title = detailCharacter.name
+            binding.content.tvDetailDescription.text = detailCharacter.species
+            Glide.with(this@DetailCharacterActivity)
+                .load(detailCharacter.image)
                 .into(binding.ivDetailImage)
 
-            var statusFavorite = detailTourism.isFavorite
+            var statusFavorite = detailCharacter.isFavorite
             setStatusFavorite(statusFavorite)
             binding.fab.setOnClickListener {
                 statusFavorite = !statusFavorite
-                detailTourismViewModel.setFavoriteTourism(detailTourism, statusFavorite)
+                detailCharacterViewModel.setFavoriteCharacter(detailCharacter, statusFavorite)
                 setStatusFavorite(statusFavorite)
             }
         }

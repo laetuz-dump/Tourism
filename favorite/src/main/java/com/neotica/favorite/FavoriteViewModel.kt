@@ -1,9 +1,9 @@
 package com.neotica.favorite
 
 import androidx.lifecycle.ViewModel
-import com.neotica.core.domain.usecase.TourismUseCase
+import com.neotica.core.domain.usecase.CharacterUseCase
 
-class FavoriteViewModel(tourismUseCase: TourismUseCase) : ViewModel() {
-    val favoriteTourism = tourismUseCase.getFavoriteTourism()
+class FavoriteViewModel(charUseCase: CharacterUseCase) : ViewModel() {
+    val favoriteCharacter = charUseCase.getFavoriteCharacter()
 }
 

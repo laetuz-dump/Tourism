@@ -1,53 +1,50 @@
 package com.neotica.core.utils
 
-import com.neotica.core.data.source.local.entity.TourismEntity
-import com.neotica.core.data.source.remote.response.TourismResponse
-import com.neotica.core.domain.model.Tourism
+import com.neotica.core.data.source.local.entity.CharacterEntity
+import com.neotica.core.data.source.remote.response.CharacterResponse
+import com.neotica.core.domain.model.Character
 
 object DataMapper {
-    fun mapResponsesToEntities(input: List<TourismResponse>): List<TourismEntity> {
-        val tourismList = ArrayList<TourismEntity>()
+    fun mapResponsesToEntities(input: List<CharacterResponse>): List<CharacterEntity> {
+        val charList = ArrayList<CharacterEntity>()
         input.map {
-            val tourism = TourismEntity(
-                tourismId = it.id,
-                description = it.description,
+            val character = CharacterEntity(
+                charId = it.id,
                 name = it.name,
-                address = it.address,
-                latitude = it.latitude,
-                longitude = it.longitude,
-                like = it.like,
+                status = it.status,
+                species = it.species,
+                type = it.type,
+                gender = it.gender,
                 image = it.image,
                 isFavorite = false
             )
-            tourismList.add(tourism)
+            charList.add(character)
         }
-        return tourismList
+        return charList
     }
 
-    fun mapEntitiesToDomain(input: List<TourismEntity>): List<Tourism> =
+    fun mapEntitiesToDomain(input: List<CharacterEntity>): List<Character> =
         input.map {
-            Tourism(
-                tourismId = it.tourismId,
-                description = it.description,
+            Character(
+                id = it.charId,
                 name = it.name,
-                address = it.address,
-                latitude = it.latitude,
-                longitude = it.longitude,
-                like = it.like,
+                status = it.status,
+                species = it.species,
+                type = it.type,
+                gender = it.gender,
                 image = it.image,
                 isFavorite = it.isFavorite
             )
         }
 
-    fun mapDomainToEntity(input: Tourism) = TourismEntity(
-        tourismId = input.tourismId,
-        description = input.description,
-        name = input.name,
-        address = input.address,
-        latitude = input.latitude,
-        longitude = input.longitude,
-        like = input.like,
-        image = input.image,
-        isFavorite = input.isFavorite
+    fun mapDomainToEntity(it: Character) = CharacterEntity(
+        charId = it.id,
+        name = it.name,
+        status = it.status,
+        species = it.species,
+        type = it.type,
+        gender = it.gender,
+        image = it.image,
+        isFavorite = false
     )
 }

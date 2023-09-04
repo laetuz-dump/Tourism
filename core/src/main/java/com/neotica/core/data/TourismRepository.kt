@@ -1,9 +1,11 @@
+/*
 package com.neotica.core.data
 
 import com.neotica.core.data.source.local.LocalDataSource
 import com.neotica.core.data.source.remote.RemoteDataSource
 import com.neotica.core.data.source.remote.network.ApiResponse
 import com.neotica.core.data.source.remote.response.TourismResponse
+import com.neotica.core.domain.model.Character
 import com.neotica.core.domain.model.Tourism
 import com.neotica.core.domain.repository.ITourismRepository
 import com.neotica.core.utils.AppExecutors
@@ -25,7 +27,7 @@ class TourismRepository (
             Flow<Resource<List<Tourism>>> {
             override fun loadFromDB(): Flow<List<Tourism>> {
                 return localDataSource.getAllTourism().map { DataMapper.mapEntitiesToDomain(it) }
-                }
+            }
 
             override suspend fun createCall(): Flow<ApiResponse<List<TourismResponse>>> =
                 remoteDataSource.getAllTourism()
@@ -38,7 +40,7 @@ class TourismRepository (
                 }
             }
 
-            override fun shouldFetch(data: List<Tourism>?): Boolean =
+            override fun shouldFetch(data: List<Character>): Boolean =
                 data.isNullOrEmpty()
 
 
@@ -47,9 +49,7 @@ class TourismRepository (
             }
         }.asFlow()
 
-    override fun getFavoriteTourism(): Flow<List<Tourism>> {
-        return localDataSource.getFavoriteTourism().map { DataMapper.mapEntitiesToDomain(it) }
-    }
+
 
     override fun setFavoriteTourism(tourism: Tourism, state: Boolean) {
         val tourismEntity = DataMapper.mapDomainToEntity(tourism)
@@ -57,3 +57,4 @@ class TourismRepository (
     }
 }
 
+*/

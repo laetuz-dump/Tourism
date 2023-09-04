@@ -1,12 +1,12 @@
 package com.neotica.core.di
 
 import androidx.room.Room
-import com.neotica.core.data.TourismRepository
+import com.neotica.core.data.CharacterRepository
 import com.neotica.core.data.source.local.LocalDataSource
-import com.neotica.core.data.source.local.room.TourismDatabase
+import com.neotica.core.data.source.local.room.CharacterDatabase
 import com.neotica.core.data.source.remote.RemoteDataSource
 import com.neotica.core.data.source.remote.network.ApiService
-import com.neotica.core.domain.repository.ITourismRepository
+import com.neotica.core.domain.repository.ICharacterRepository
 import com.neotica.core.utils.AppExecutors
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,10 +17,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val databaseModule = module {
-    factory { get<TourismDatabase>().tourismDao() }
+    factory { get<CharacterDatabase>().characterDao() }
     single {
         Room.databaseBuilder(
-            androidContext(), TourismDatabase::class.java, "Tourism.db"
+            androidContext(), CharacterDatabase::class.java, "Rick.db"
         ).fallbackToDestructiveMigration().build()
     }
 }
@@ -35,7 +35,7 @@ val networkModule = module {
     }
     single {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://tourism-api.dicoding.dev/")
+            .baseUrl("https://rickandmortyapi.com/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()
@@ -47,5 +47,6 @@ val repositoryModule = module {
     single { LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
     factory { AppExecutors() }
-    single<ITourismRepository> { TourismRepository(get(), get(), get()) }
+    single<ICharacterRepository> { CharacterRepository(get(), get(), get()) }
+  //  single<ITourismRepository> { TourismRepository(get(), get(), get()) }
 }

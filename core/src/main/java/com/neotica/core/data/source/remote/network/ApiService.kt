@@ -1,9 +1,9 @@
 package com.neotica.core.data.source.remote.network
 
-import com.neotica.core.data.source.remote.response.ListTourismResponse
+import com.neotica.core.data.source.remote.response.CharacterListResponse
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET("list")
-    suspend fun getList(): ListTourismResponse
+    @GET("character")
+    suspend fun getList(): CharacterListResponse
 }

@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".detail.DetailTourismActivity"
+            android:name=".detail.DetailCharacterActivity"
             android:label="@string/title_activity_detail_home"
             android:theme="@style/Theme.Tourism.NoActionBar" />
     </application>

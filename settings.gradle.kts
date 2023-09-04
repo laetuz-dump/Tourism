@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "Tourism"
 include(":app")
 include(":core")
+include(":maps")

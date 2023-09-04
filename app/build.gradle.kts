@@ -39,7 +39,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    dynamicFeatures += setOf(":maps", ":favorite")
+    dynamicFeatures += setOf(":favorite")
 }
 
 dependencies {

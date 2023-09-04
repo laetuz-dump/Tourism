@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Tourism"
+rootProject.name = "Rick n Morty!"
 include(":app")
 include(":core")
 include(":favorite")

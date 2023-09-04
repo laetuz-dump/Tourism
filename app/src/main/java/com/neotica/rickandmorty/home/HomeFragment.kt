@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.neotica.core.ui.CharacterAdapter
+import com.neotica.rickandmorty.R
+import com.neotica.rickandmorty.databinding.FragmentHomeBinding
 import com.neotica.rickandmorty.detail.DetailCharacterActivity
-import com.neotica.tourism.R
-import com.neotica.tourism.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

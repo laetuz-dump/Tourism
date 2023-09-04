@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.neotica.core.domain.model.Character
-import com.neotica.tourism.R
-import com.neotica.tourism.databinding.ActivityDetailCharacterBinding
+import com.neotica.rickandmorty.R
+import com.neotica.rickandmorty.databinding.ActivityDetailCharacterBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailCharacterActivity : AppCompatActivity() {

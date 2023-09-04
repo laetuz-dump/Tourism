@@ -7,11 +7,11 @@ plugins {
 apply(from = "../shared_dependencies.gradle")
 
 android {
-    namespace = "com.neotica.tourism"
+    namespace = "com.neotica.rickandmorty"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.neotica.tourism"
+        applicationId = "com.neotica.rickandmorty"
         minSdk = 27
         targetSdk = 33
         versionCode = 1

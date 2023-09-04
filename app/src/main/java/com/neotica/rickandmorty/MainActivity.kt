@@ -7,9 +7,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.neotica.rickandmorty.databinding.ActivityMainBinding
 import com.neotica.rickandmorty.home.HomeFragment
-import com.neotica.tourism.R
-import com.neotica.tourism.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

@@ -11,7 +11,6 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.neotica.tourism.databinding.ActivityMainBinding
-import com.neotica.tourism.favorite.FavoriteFragment
 import com.neotica.tourism.home.HomeFragment
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -52,8 +51,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 title = getString(R.string.app_name)
             }
             R.id.nav_favorite -> {
-                fragment = FavoriteFragment()
-                title = getString(R.string.menu_favorite)
+               /* fragment = FavoriteFragment()
+                title = getString(R.string.menu_favorite)*/
+                val uri = Uri.parse("tourism://favorite")
+                startActivity(Intent(Intent.ACTION_VIEW, uri))
             }
             R.id.nav_map -> {
                 val uri = Uri.parse("tourism://maps")

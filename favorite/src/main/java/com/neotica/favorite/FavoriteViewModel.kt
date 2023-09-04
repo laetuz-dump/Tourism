@@ -1,4 +1,4 @@
-package com.neotica.tourism.favorite
+package com.neotica.favorite
 
 import androidx.lifecycle.ViewModel
 import com.neotica.core.domain.usecase.TourismUseCase

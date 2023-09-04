@@ -1,4 +1,4 @@
-package com.neotica.tourism.home
+package com.neotica.rickandmorty.home
 
 import androidx.lifecycle.ViewModel
 import com.neotica.core.data.Resource

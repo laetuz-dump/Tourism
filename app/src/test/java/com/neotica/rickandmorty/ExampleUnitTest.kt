@@ -1,4 +1,4 @@
-package com.neotica.tourism
+package com.neotica.rickandmorty
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.neotica.tourism.home
+package com.neotica.rickandmorty.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.neotica.core.ui.TourismAdapter
+import com.neotica.core.ui.CharacterAdapter
+import com.neotica.rickandmorty.detail.DetailCharacterActivity
 import com.neotica.tourism.R
 import com.neotica.tourism.databinding.FragmentHomeBinding
-import com.neotica.tourism.detail.DetailCharacterActivity
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,8 +35,8 @@ class HomeFragment : Fragment() {
 
         if (activity != null) {
 
-            val tourismAdapter = TourismAdapter()
-            tourismAdapter.onItemClick = { selectedData ->
+            val characterAdapter = CharacterAdapter()
+            characterAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailCharacterActivity::class.java)
                 intent.putExtra(DetailCharacterActivity.EXTRA_DATA, selectedData)
                 startActivity(intent)
@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
                         is com.neotica.core.data.Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                         is com.neotica.core.data.Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
-                            tourismAdapter.setData(it.data)
+                            characterAdapter.setData(it.data)
                         }
 
                         is com.neotica.core.data.Resource.Error -> {
@@ -61,10 +61,10 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            with(binding.rvTourism) {
+            with(binding.rvCharacter) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
-                adapter = tourismAdapter
+                adapter = characterAdapter
             }
         }
     }

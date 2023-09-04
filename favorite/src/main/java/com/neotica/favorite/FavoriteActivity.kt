@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.neotica.core.ui.TourismAdapter
+import com.neotica.core.ui.CharacterAdapter
 import com.neotica.favorite.databinding.ActivityFavoriteBinding
-import com.neotica.tourism.detail.DetailCharacterActivity
+import com.neotica.rickandmorty.detail.DetailCharacterActivity
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
@@ -24,8 +24,8 @@ class FavoriteActivity : AppCompatActivity() {
 
         loadKoinModules(favoriteModule)
 
-        val tourismAdapter = TourismAdapter()
-        tourismAdapter.onItemClick = { selectedData ->
+        val characterAdapter = CharacterAdapter()
+        characterAdapter.onItemClick = { selectedData ->
             val intent = Intent(this, DetailCharacterActivity::class.java)
             intent.putExtra(DetailCharacterActivity.EXTRA_DATA, selectedData)
             startActivity(intent)
@@ -33,16 +33,16 @@ class FavoriteActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             favoriteViewModel.favoriteCharacter.collect {
-                tourismAdapter.setData(it)
+                characterAdapter.setData(it)
                 binding.viewEmpty.root.visibility =
                     if (it.isNotEmpty()) View.GONE else View.VISIBLE
             }
         }
 
-        with(binding.rvTourism) {
+        with(binding.rvCharacter) {
             layoutManager = LinearLayoutManager(this@FavoriteActivity)
             setHasFixedSize(true)
-            adapter = tourismAdapter
+            adapter = characterAdapter
         }
 
     }

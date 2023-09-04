@@ -1,4 +1,4 @@
-package com.neotica.tourism.detail
+package com.neotica.rickandmorty.detail
 
 import androidx.lifecycle.ViewModel
 import com.neotica.core.domain.model.Character

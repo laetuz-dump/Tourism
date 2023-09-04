@@ -9,13 +9,13 @@ import kotlinx.coroutines.launch
 
 class LocalDataSource (private val charDao: CharacterDao) {
 
-    fun getAllTourism(): Flow<List<CharacterEntity>> = charDao.getAllCharacter()
+    fun getAllCharacter(): Flow<List<CharacterEntity>> = charDao.getAllCharacter()
 
-    fun getFavoriteTourism(): Flow<List<CharacterEntity>> = charDao.getFavoriteCharacter()
+    fun getFavoriteCharacter(): Flow<List<CharacterEntity>> = charDao.getFavoriteCharacter()
 
-    fun insertTourism(charList: List<CharacterEntity>) = charDao.insertCharacter(charList)
+    fun insertCharacter(charList: List<CharacterEntity>) = charDao.insertCharacter(charList)
 
-    fun setFavoriteTourism(char: CharacterEntity, newState: Boolean) {
+    fun setFavoriteCharacter(char: CharacterEntity, newState: Boolean) {
         char.isFavorite = newState
         CoroutineScope(Dispatchers.IO).launch {
             charDao.updateFavoriteCharacter(char)

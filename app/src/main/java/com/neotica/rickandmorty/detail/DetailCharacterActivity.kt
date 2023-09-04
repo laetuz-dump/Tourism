@@ -1,5 +1,6 @@
-package com.neotica.tourism.detail
+package com.neotica.rickandmorty.detail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -26,14 +27,21 @@ class DetailCharacterActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
 
-        val detailTourism = intent.getParcelableExtra<Character>(EXTRA_DATA)
-        showDetailTourism(detailTourism)
+        val detailCharacter = intent.getParcelableExtra<Character>(EXTRA_DATA)
+        showDetailCharacter(detailCharacter)
     }
 
-    private fun showDetailTourism(detailCharacter: Character?) {
+    @SuppressLint("SetTextI18n")
+    private fun showDetailCharacter(detailCharacter: Character?) {
         detailCharacter?.let {
             supportActionBar?.title = detailCharacter.name
-            binding.content.tvDetailDescription.text = detailCharacter.species
+            binding.content.apply {
+                tvTitle.text = detailCharacter.name
+                tvDetailGender.text = "Gender: " + detailCharacter.gender
+                tvDetailDescription.text = "Species: " + detailCharacter.species
+                tvDetailStatus.text = "Status: " + detailCharacter.status
+                tvDetailType.text = "Type: " + if (detailCharacter.type == "") "Nothing" else detailCharacter.type
+            }
             Glide.with(this@DetailCharacterActivity)
                 .load(detailCharacter.image)
                 .into(binding.ivDetailImage)

@@ -27,16 +27,16 @@ class CharacterRepository (
             }
 
             override fun loadFromDB(): Flow<List<Character>> {
-                return localDataSource.getAllTourism().map { DataMapper.mapEntitiesToDomain(it) }
+                return localDataSource.getAllCharacter().map { DataMapper.mapEntitiesToDomain(it) }
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<CharacterResponse>>> =
-                remoteDataSource.getAllTourism()
+                remoteDataSource.getAllCharacter()
 
             override suspend fun saveCallResult(data: List<CharacterResponse>) {
                 val charList = DataMapper.mapResponsesToEntities(data)
                 withContext(Dispatchers.IO){
-                    localDataSource.insertTourism(charList)
+                    localDataSource.insertCharacter(charList)
                 }
             }
 
@@ -44,12 +44,12 @@ class CharacterRepository (
         }.asFlow()
 
     override fun getFavoriteCharacter(): Flow<List<Character>> {
-        return localDataSource.getFavoriteTourism().map { DataMapper.mapEntitiesToDomain(it) }
+        return localDataSource.getFavoriteCharacter().map { DataMapper.mapEntitiesToDomain(it) }
     }
 
     override fun setFavoriteCharacter(character: Character, state: Boolean) {
         val charEntity = DataMapper.mapDomainToEntity(character)
-        appExecutors.diskIO().execute { localDataSource.setFavoriteTourism(charEntity, state) }
+        appExecutors.diskIO().execute { localDataSource.setFavoriteCharacter(charEntity, state) }
     }
 }
 

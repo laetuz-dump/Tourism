@@ -1,4 +1,4 @@
-package com.neotica.tourism
+package com.neotica.rickandmorty
 
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
@@ -13,7 +13,7 @@ class MyApp: Application() {
             androidLogger(Level.NONE)
             androidContext(this@MyApp)
             modules(
-                com.neotica.tourism.di.modules
+                com.neotica.rickandmorty.di.modules
             )
         }
     }

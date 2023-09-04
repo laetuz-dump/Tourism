@@ -1,4 +1,4 @@
-package com.neotica.tourism
+package com.neotica.rickandmorty
 
 import android.content.Intent
 import android.net.Uri
@@ -7,8 +7,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.neotica.rickandmorty.home.HomeFragment
+import com.neotica.tourism.R
 import com.neotica.tourism.databinding.ActivityMainBinding
-import com.neotica.tourism.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

@@ -33,6 +33,10 @@ jobs:
             echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $BASH_ENV
             source $BASH_ENV
             java -version
+      # Display Gradle Version
+      - run:
+          name: Display Gradle Version
+          command: ./gradlew --version
       # Clear Gradle Cache
       - run:
           name: Clear Gradle Cache

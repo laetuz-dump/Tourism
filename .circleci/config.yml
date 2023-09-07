@@ -23,7 +23,7 @@ jobs:
           paths:
             - ~/.android/build-cache
             - ~/.android/cache
-      # Install OpenJDK 17
+      # Install OpenJDK 17 and set JAVA_HOME
       - run:
           name: Install OpenJDK 17
           command: |
@@ -33,13 +33,18 @@ jobs:
             echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $BASH_ENV
             source $BASH_ENV
             java -version
+      # Clear Gradle Cache
+      - run:
+          name: Clear Gradle Cache
+          command: ./gradlew cleanBuildCache
       # Change Gradle version
       - run:
           name: Use Gradle 7.6
           command: echo "distributionUrl=https\://services.gradle.org/distributions/gradle-7.6-all.zip" > gradle/wrapper/gradle-wrapper.properties
+      # Run Build with Debugging
       - run:
-          name: Run Build
-          command: ./gradlew build --warning-mode all
+          name: Run Build with Debugging
+          command: ./gradlew build --warning-mode all --stacktrace --debug
       - store_artifacts:
           path: app/build/reports
           destination: reports

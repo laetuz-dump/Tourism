@@ -3,6 +3,7 @@ package com.neotica.core.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.neotica.core.R
@@ -17,9 +18,13 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.ListViewHolder>()
 
     fun setData(newListData: List<Character>?) {
         if (newListData == null) return
+
+        val diffCallback = CharacterDiffCallback(listData, newListData)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
         listData.clear()
         listData.addAll(newListData)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =

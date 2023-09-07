@@ -11,11 +11,6 @@ import com.neotica.rickandmorty.databinding.ActivityDetailCharacterBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailCharacterActivity : AppCompatActivity() {
-
-    companion object {
-        const val EXTRA_DATA = "extra_data"
-    }
-
     private val detailCharacterViewModel: DetailCharacterViewModel by viewModel()
     private lateinit var binding: ActivityDetailCharacterBinding
 
@@ -62,5 +57,9 @@ class DetailCharacterActivity : AppCompatActivity() {
         } else {
             binding.fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_not_favorite_white))
         }
+    }
+
+    companion object {
+        const val EXTRA_DATA = "extra_data"
     }
 }

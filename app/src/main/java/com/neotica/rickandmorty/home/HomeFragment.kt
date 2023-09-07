@@ -20,7 +20,7 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModel()
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding?:throw IllegalStateException("Null binding.")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

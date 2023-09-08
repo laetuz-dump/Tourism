@@ -40,7 +40,7 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     testImplementation("junit:junit:4.13.2")
@@ -62,8 +62,8 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
     //Coroutines
-    val kotlinVersion = "1.6.2"
+    val kotlinVersion = "1.6.4"
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinVersion")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinVersion")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:$kotlinVersion")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
 }
